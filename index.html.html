@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Digital Business Cards</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 p-6">
+  <h1 class="text-3xl font-bold text-center mb-8">Local Business Digital Cards</h1>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div class="bg-aqua shadow-xl rounded-3xl overflow-hidden" style="background: rgb(249, 247, 104);">
+       <header>
+
+
+
+        <!-- 🔍 Search Bar -->
+        <div class="flex justify-center items-center gap-2 mb-6" style="margin: 100px;">
+          <input id="searchInput" type="text" placeholder="Search store..."
+            class="w-1/2 p-2 border rounded-lg shadow-sm" />
+          <button onclick="searchStores()" class="px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600">
+            Search
+          </button>
+        </div>
+
+        <script>
+          function searchStores() {
+            let input = document.getElementById("searchInput").value.toLowerCase();
+            let stores = document.getElementsByClassName("store-card");
+
+            for (let i = 0; i < stores.length; i++) {
+              let storeName = stores[i].innerText.toLowerCase();
+              if (storeName.includes(input)) {
+                stores[i].style.display = "";
+              } else {
+                stores[i].style.display = "none";
+              }
+            }
+          }
+        </script>
+
+
+        <!-- Add Store Button
+        <div class="flex justify-center mb-6">
+          <button onclick="addNewStore()"
+            class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg shadow-md">
+            ➕ Add Store
+          </button>
+        </div> -->
+
+        <!-- Store Container (Grid Layout) -->
+        <div id="storeContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
+          
+        </div>
+ 
+        <script>
+          // ➕ Add New Store Function
+          function addNewStore() {
+            let storeName = prompt("Enter store name:");
+            let storeDesc = prompt("Enter store description:");
+            let phone = prompt("Enter phone number:");
+            let color = "bg-gray-600"; // default color
+
+            if (!storeName || !phone) {
+              alert("Store name and phone are required!");
+              return;
+            }
+
+            let newStore = document.createElement("div");
+            newStore.className = "store bg-white shadow-xl rounded-2xl overflow-hidden";
+            newStore.innerHTML = `
+      <div class="${color} text-white p-6 text-center">
+        <img src="https://via.placeholder.com/150" alt="${storeName}" 
+             class="w-24 h-24 mx-auto rounded-full border-4 border-white shadow-md">
+        <h1 class="store-name text-2xl font-bold mt-4">${storeName}</h1>
+        <p class="text-sm opacity-90">${storeDesc || "Newly Added Store"}</p>
+      </div>
+      <div class="p-6 space-y-2">
+        <a href="tel:${phone}" class="block bg-green-500 text-white py-2 rounded-lg text-center">📞 Call Now</a>
+        <a href="https://wa.me/${phone}" target="_blank" class="block bg-green-600 text-white py-2 rounded-lg text-center">💬 WhatsApp</a>
+      </div>
+    `;
+
+            document.getElementById("storeContainer").appendChild(newStore);
+          }
+        </script>
+
+        <!-- Buttons -->
+<div class="flex justify-center gap-4 mb-6">
+  <button onclick="addNewStore()" 
+          class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg shadow-md">
+    ➕ Add Store
+  </button>
+  <button onclick="deleteStore()" 
+          class="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg shadow-md">
+    ❌ Delete Store
+  </button>
+</div>
+
+<!-- Store Container (Grid Layout) -->
+<div id="storeContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
+  
+</div>
+
+<script>
+  // ➕ Add New Store Function
+  function addNewStore() {
+    let storeName = prompt("Enter store name:");
+    let storeDesc = prompt("Enter store description:");
+    let phone = prompt("Enter phone number:");
+    let color = "bg-gray-600"; // default color
+
+    if (!storeName || !phone) {
+      alert("Store name and phone are required!");
+      return;
+    }
+
+    let newStore = document.createElement("div");
+    newStore.className = "store bg-white shadow-xl rounded-2xl overflow-hidden";
+    newStore.innerHTML = `
+      <div class="${color} text-white p-6 text-center">
+        <img src="https://via.placeholder.com/150" alt="${storeName}" 
+             class="w-24 h-24 mx-auto rounded-full border-4 border-white shadow-md">
+        <h1 class="store-name text-2xl font-bold mt-4">${storeName}</h1>
+        <p class="text-sm opacity-90">${storeDesc || "Newly Added Store"}</p>
+      </div>
+      <div class="p-6 space-y-2">
+        <a href="tel:${phone}" class="block bg-green-500 text-white py-2 rounded-lg text-center">📞 Call Now</a>
+        <a href="https://wa.me/${phone}" target="_blank" class="block bg-green-600 text-white py-2 rounded-lg text-center">💬 WhatsApp</a>
+      </div>
+    `;
+    document.getElementById("storeContainer").appendChild(newStore);
+  }
+
+  // ❌ Delete Store Function
+  function deleteStore() {
+    let storeName = prompt("Enter the store name to delete:");
+    if (!storeName) {
+      alert("Please enter a valid store name!");
+      return;
+    }
+
+    let stores = document.querySelectorAll("#storeContainer .store");
+    let found = false;
+
+    stores.forEach(store => {
+      let name = store.querySelector(".store-name").textContent.trim();
+      if (name.toLowerCase() === storeName.toLowerCase()) {
+        store.remove();
+        found = true;
+      }
+    });
+
+    if (!found) {
+      alert("Store not found!");
+    }
+  }
+</script>
+
+
+      </header>
+    </div>
+
+
+
+    <!-- Store 1: General Store -->
+    <div class="bg-white shadow-xl rounded-2xl overflow-hidden">
+      <div class="bg-indigo-600 text-white p-6 text-center">
+        <img src="https://tse2.mm.bing.net/th/id/OIP.mQQd8jCPLskvTNuamtGo_gHaHa?rs=1&pid=ImgDetMain&o=7&rm=3"
+          alt="General Store" class="w-24 h-24 mx-auto rounded-full border-4 border-white shadow-md">
+        <h1 class="text-2xl font-bold mt-4">Sharma General Store</h1>
+        <p class="text-sm opacity-90">Your Friendly Neighborhood Shop</p>
+      </div>
+      <div class="p-6 space-y-2">
+        <a href="tel:+919876543210" class="block bg-green-500 text-white py-2 rounded-lg text-center">📞 Call Now</a>
+        <a href="https://wa.me/919876543210" target="_blank"
+          class="block bg-green-600 text-white py-2 rounded-lg text-center">💬 WhatsApp</a>
+      </div>
+      <div class="p-6 border-t">
+        <h2 class="font-semibold">Address</h2>
+        <p>123 Main Road, Pune</p>
+        <a href="https://maps.google.com?q=123+Main+Road+Pune" target="_blank"
+          class="inline-block mt-2 bg-indigo-500 text-white px-3 py-1 rounded-lg">📍 Open in Maps</a>
+      </div>
+      <div class="p-6 border-t">
+        <h2 class="font-semibold">Opening Hours</h2>
+        <ul class="text-gray-600 mt-2">
+          <li>Mon - Sat: 9:00 AM - 9:00 PM</li>
+          <li>Sunday: 10:00 AM - 5:00 PM</li>
+        </ul>
+      </div>
+      <div class="p-6 border-t">
+        <h2 class="font-semibold">Gallery</h2>
+        <div class="grid grid-cols-3 gap-2 mt-2">
+          <img
+            src="https://houston.culturemap.com/media-library/jefferson-general-store.jpg?id=31651453&width=2000&height=1500&quality=85&coordinates=0%2C0%2C0%2C0"
+            class="w-full h-24 object-cover rounded-lg">
+          <img
+            src="https://tse2.mm.bing.net/th/id/OIP.YmUh8myiZHt3ZHUewuiQewHaE8?w=900&h=600&rs=1&pid=ImgDetMain&o=7&rm=3"
+            class="w-full h-24 object-cover rounded-lg">
+          <img
+            src="https://tse1.explicit.bing.net/th/id/OIP.vf8cKnDiS0Hj4Qv-04Nx4gHaJQ?w=819&h=1024&rs=1&pid=ImgDetMain&o=7&rm=3"
+            class="w-full h-24 object-cover rounded-lg">
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Store 2: Bakery -->
+    <div class="bg-white shadow-xl rounded-2xl overflow-hidden">
+      <div class="bg-red-600 text-white p-6 text-center">
+        <img src="https://images.unsplash.com/photo-1608198093002-ad4e005484ec?w=200" alt="Bakery"
+          class="w-24 h-24 mx-auto rounded-full border-4 border-white shadow-md">
+        <h1 class="text-2xl font-bold mt-4">Patil Bakery</h1>
+        <p class="text-sm opacity-90">Fresh Breads & Sweets</p>
+      </div>
+      <div class="p-6 space-y-2">
+        <a href="tel:+919812345678" class="block bg-green-500 text-white py-2 rounded-lg text-center">📞 Call Now</a>
+        <a href="https://wa.me/919812345678" target="_blank"
+          class="block bg-green-600 text-white py-2 rounded-lg text-center">💬 WhatsApp</a>
+      </div>
+      <div class="p-6 border-t">
+        <h2 class="font-semibold">Address</h2>
+        <p>Market Road, Mumbai</p>
+        <a href="https://maps.google.com?q=Market+Road+Mumbai" target="_blank"
+          class="inline-block mt-2 bg-red-500 text-white px-3 py-1 rounded-lg">📍 Open in Maps</a>
+      </div>
+      <div class="p-6 border-t">
+        <h2 class="font-semibold">Opening Hours</h2>
+        <ul class="text-gray-600 mt-2">
+          <li>Mon - Sun: 7:00 AM - 10:00 PM</li>
+        </ul>
+      </div>
+      <div class="p-6 border-t">
+        <h2 class="font-semibold">Gallery</h2>
+        <div class="grid grid-cols-3 gap-2 mt-2">
+          <img src="https://images.unsplash.com/photo-1608198093002-ad4e005484ec?w=300"
+            class="w-full h-24 object-cover rounded-lg">
+          <img src="https://tse2.mm.bing.net/th/id/OIP.vXcgoKR9TVAZA8WtzvQkuAHaJ4?rs=1&pid=ImgDetMain&o=7&rm=3"
+            class="w-full h-24 object-cover rounded-lg">
+          <img
+            src="https://tse1.mm.bing.net/th/id/OIP.Zknfr4E07dwaub9S555dBwHaHa?w=512&h=512&rs=1&pid=ImgDetMain&o=7&rm=3"
+            class="w-full h-24 object-cover rounded-lg">
+        </div>
+      </div>
+    </div>
+
+    <!-- Store 3: Electronics -->
+    <div class="bg-white shadow-xl rounded-2xl overflow-hidden">
+      <div class="bg-yellow-500 text-white p-6 text-center">
+        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=200" alt="Electronics"
+          class="w-24 h-24 mx-auto rounded-full border-4 border-white shadow-md">
+        <h1 class="text-2xl font-bold mt-4">Deshmukh Electronics</h1>
+        <p class="text-sm opacity-90">Gadgets & Repairs</p>
+      </div>
+      <div class="p-6 space-y-2">
+        <a href="tel:+919855556789" class="block bg-green-500 text-white py-2 rounded-lg text-center">📞 Call Now</a>
+        <a href="https://wa.me/919855556789" target="_blank"
+          class="block bg-green-600 text-white py-2 rounded-lg text-center">💬 WhatsApp</a>
+      </div>
+      <div class="p-6 border-t">
+        <h2 class="font-semibold">Address</h2>
+        <p>Station Road, Nashik</p>
+        <a href="https://maps.google.com?q=Station+Road+Nashik" target="_blank"
+          class="inline-block mt-2 bg-yellow-500 text-white px-3 py-1 rounded-lg">📍 Open in Maps</a>
+      </div>
+      <div class="p-6 border-t">
+        <h2 class="font-semibold">Opening Hours</h2>
+        <ul class="text-gray-600 mt-2">
+          <li>Mon - Sat: 10:00 AM - 8:00 PM</li>
+          <li>Sunday: Closed</li>
+        </ul>
+      </div>
+      <div class="p-6 border-t">
+        <h2 class="font-semibold">Gallery</h2>
+        <div class="grid grid-cols-3 gap-2 mt-2">
+          <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=300"
+            class="w-full h-24 object-cover rounded-lg">
+          <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=300"
+            class="w-full h-24 object-cover rounded-lg">
+          <img
+            src="https://tse1.mm.bing.net/th/id/OIP.KkQPkq05mH1_g_Z5uDBLPgHaFW?w=1600&h=1155&rs=1&pid=ImgDetMain&o=7&rm=3"
+            class="w-full h-24 object-cover rounded-lg">
+        </div>
+      </div>
+    </div>
+
+    <!-- Store 4: Medicals -->
+    <div class="bg-white shadow-xl rounded-2xl overflow-hidden">
+      <div class="bg-green-600 text-white p-6 text-center">
+        <img
+          src="https://www.bing.com/th/id/OIP.mQe1zsjkK9fHPqEt4OC2-AHaHa?w=184&h=211&c=8&rs=1&qlt=70&o=7&cb=thws5&dpr=1.3&pid=3.1&rm=3"
+          alt="Medicals" class="w-24 h-24 mx-auto rounded-full border-4 border-white shadow-md">
+        <h1 class="text-2xl font-bold mt-4">Joshi Medicals</h1>
+        <p class="text-sm opacity-90">Healthcare Essentials</p>
+      </div>
+      <div class="p-6 space-y-2">
+        <a href="tel:+919834567890" class="block bg-green-500 text-white py-2 rounded-lg text-center">📞 Call Now</a>
+      </div>
+      <div class="p-6 border-t">
+        <h2 class="font-semibold">Address</h2>
+        <p>Bus Stand Road, Nagpur</p>
+        <a href="https://maps.google.com?q=Bus+Stand+Road+Nagpur" target="_blank"
+          class="inline-block mt-2 bg-green-600 text-white px-3 py-1 rounded-lg">📍 Open in Maps</a>
+      </div>
+      <div class="p-6 border-t">
+        <h2 class="font-semibold">Opening Hours</h2>
+        <ul class="text-gray-600 mt-2">
+          <li>Mon - Sun: 8:00 AM - 10:00 PM</li>
+        </ul>
+      </div>
+      <div class="p-6 border-t">
+        <h2 class="font-semibold">Gallery</h2>
+        <div class="grid grid-cols-3 gap-2 mt-2">
+          <img src="https://skydecengineers.com/wp-content/uploads/2023/09/medical-store.png"
+            class="w-full h-24 object-cover rounded-lg">
+          <img
+            src="https://tse1.mm.bing.net/th/id/OIP.tZthw8WdTvL0jJnumkiRfAHaE7?w=1480&h=986&rs=1&pid=ImgDetMain&o=7&rm=3"
+            class="w-full h-24 object-cover rounded-lg">
+          <img
+            src="https://tse4.mm.bing.net/th/id/OIP.bvg4_8BG82V72SlceR8gXAHaEj?w=1300&h=800&rs=1&pid=ImgDetMain&o=7&rm=3"
+            class="w-full h-24 object-cover rounded-lg">
+        </div>
+      </div>
+    </div>
+
+    <!-- Store 5: Bookstore -->
+    <div class="bg-white shadow-xl rounded-2xl overflow-hidden">
+      <div class="bg-blue-600 text-white p-6 text-center">
+        <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?w=200" alt="Bookstore"
+          class="w-24 h-24 mx-auto rounded-full border-4 border-white shadow-md">
+        <h1 class="text-2xl font-bold mt-4">Khan Bookstore</h1>
+        <p class="text-sm opacity-90">Books & Stationery</p>
+      </div>
+      <div class="p-6 space-y-2">
+        <a href="tel:+919822223344" class="block bg-green-500 text-white py-2 rounded-lg text-center">📞 Call Now</a>
+      </div>
+      <div class="p-6 border-t">
+        <h2 class="font-semibold">Address</h2>
+        <p>College Road, Aurangabad</p>
+        <a href="https://maps.google.com?q=College+Road+Aurangabad" target="_blank"
+          class="inline-block mt-2 bg-blue-600 text-white px-3 py-1 rounded-lg">📍 Open in Maps</a>
+      </div>
+      <div class="p-6 border-t">
+        <h2 class="font-semibold">Opening Hours</h2>
+        <ul class="text-gray-600 mt-2">
+          <li>Mon - Sat: 9:00 AM - 8:00 PM</li>
+          <li>Sunday: Closed</li>
+        </ul>
+      </div>
+      <div class="p-6 border-t">
+        <h2 class="font-semibold">Gallery</h2>
+        <div class="grid grid-cols-3 gap-2 mt-2">
+          <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?w=300"
+            class="w-full h-24 object-cover rounded-lg">
+          <img src="https://images.unsplash.com/photo-1495446815901-a7297e633e8d?w=300"
+            class="w-full h-24 object-cover rounded-lg">
+          <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=300"
+            class="w-full h-24 object-cover rounded-lg">
+        </div>
+      </div>
+    </div>
+
+    <!-- Store 6: Clothing -->
+    <div class="bg-white shadow-xl rounded-2xl overflow-hidden">
+      <div class="bg-purple-600 text-white p-6 text-center">
+        <img src="https://images.unsplash.com/photo-1521334884684-d80222895322?w=200" alt="Clothing"
+          class="w-24 h-24 mx-auto rounded-full border-4 border-white shadow-md">
+        <h1 class="text-2xl font-bold mt-4">Mehta Clothing</h1>
+        <p class="text-sm opacity-90">Trendy Apparel</p>
+      </div>
+      <div class="p-6 space-y-2">
+        <a href="tel:+919811112222" class="block bg-green-500 text-white py-2 rounded-lg text-center">📞 Call Now</a>
+      </div>
+      <div class="p-6 border-t">
+        <h2 class="font-semibold">Address</h2>
+        <p>Laxmi Road, Kolhapur</p>
+        <a href="https://maps.google.com?q=Laxmi+Road+Kolhapur" target="_blank"
+          class="inline-block mt-2 bg-purple-600 text-white px-3 py-1 rounded-lg">📍 Open in Maps</a>
+      </div>
+      <div class="p-6 border-t">
+        <h2 class="font-semibold">Opening Hours</h2>
+        <ul class="text-gray-600 mt-2">
+          <li>Mon - Sat: 10:00 AM - 9:00 PM</li>
+          <li>Sunday: 11:00 AM - 6:00 PM</li>
+        </ul>
+      </div>
+      <div class="p-6 border-t">
+        <h2 class="font-semibold">Gallery</h2>
+        <div class="grid grid-cols-3 gap-2 mt-2">
+          <img src="https://images.unsplash.com/photo-1521334884684-d80222895322?w=300"
+            class="w-full h-24 object-cover rounded-lg">
+          <img
+            src="https://img.freepik.com/premium-photo/luxury-shopping-mall-department-clothing-store-interior_271317-1371.jpg?w=2000"
+            class="w-full h-24 object-cover rounded-lg">
+          <img
+            src="https://media.istockphoto.com/id/1281657678/photo/clothing-store-retail-display-in-shopping-mall.jpg?s=612x612&w=0&k=20&c=KlKtepkgzUdEv1_Hh_pG4PmitnneqS5T5lOA6K4Slm8="
+            class="w-full h-24 object-cover rounded-lg">
+        </div>
+      </div>
+    </div>
+
+    <!-- Store 7: Salon -->
+    <div class="bg-white shadow-xl rounded-2xl overflow-hidden">
+      <div class="bg-pink-600 text-white p-6 text-center">
+        <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=200" alt="Salon"
+          class="w-24 h-24 mx-auto rounded-full border-4 border-white shadow-md">
+        <h1 class="text-2xl font-bold mt-4">Rao Salon</h1>
+        <p class="text-sm opacity-90">Grooming & Style</p>
+      </div>
+      <div class="p-6 space-y-2">
+        <a href="tel:+919833334455" class="block bg-green-500 text-white py-2 rounded-lg text-center">📞 Call Now</a>
+      </div>
+      <div class="p-6 border-t">
+        <h2 class="font-semibold">Address</h2>
+        <p>Main Bazaar, Solapur</p>
+        <a href="https://maps.google.com?q=Main+Bazaar+Solapur" target="_blank"
+          class="inline-block mt-2 bg-pink-600 text-white px-3 py-1 rounded-lg">📍 Open in Maps</a>
+        <div class="p-6 border-t">
+          <h2 class="font-semibold">Opening Hours</h2>
+          <ul class="text-gray-600 mt-2">
+            <li>Mon - Sat: 10:00 AM - 9:00 PM</li>
+            <li>Sunday: 11:00 AM - 6:00 PM</li>
+          </ul>
+        </div>
+        <div class="p-6 border-t">
+          <h2 class="font-semibold">Gallery</h2>
+          <div class="grid grid-cols-3 gap-2 mt-2">
+            <img src="https://cdn1.treatwell.net/images/view/v2.i5059481.w1280.h800.x59DAEEF2/"
+              class="w-full h-24 object-cover rounded-lg">
+            <img
+              src="https://images.squarespace-cdn.com/content/v1/5909eb4d893fc0d3188d4f8a/1530748819095-E6FUGD5YGSVO1BMVE3MS/ke17ZwdGBToddI8pDm48kPqQfq0L3n3wpHIsRapTfg8UqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8N_N4V1vUb5AoIIIbLZhVYxCRW4BPu10St3TBAUQYVKczo5Zn4xktlpMsMj-QlHXeMfNK6GwvtVkYEWiR8XAPyD3GfLCe_DXOSC_YcAacWL_/Tangerine+Salon+in+the+Star+at+Frisco.jpg"
+              class="w-full h-24 object-cover rounded-lg">
+            <img src="https://tse1.mm.bing.net/th/id/OIP.a25siR8grD5m5W9LV29oPgHaHJ?rs=1&pid=ImgDetMain&o=7&rm=3"
+              class="w-full h-24 object-cover rounded-lg">
+          </div>
+        </div>
+      </div>
+
+</body>
